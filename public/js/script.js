@@ -5,48 +5,36 @@ const socket = io();
 recognition.lang = 'en-US';
 recognition.interimResults = false;
 
-/*
-document.getElementById('btn').addEventListener('click', () => {
-  recognition.start();
-});
-*/
-
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log('DOMContentLoaded');
-
   let btn = document.getElementById('btn');
   if(btn) {
-    console.log('btn');
-
+    console.log('Listen Btn Found.');
     btn.addEventListener('click', () => {
-      console.log('clicked');
+      console.log('Listening to microphone.');
       recognition.start();
+      //socket.emit('chat message', 'Who are you?'); Testing socket to Dialogflow response.
     });
   }
-})
+});
 
 recognition.addEventListener('result', (e) => {
-  console.log('result');
-
+  console.log('Result from speech recogition.');
   let last = e.results.length - 1;
   let text = e.results[last][0].transcript;
-
   console.log('Words: ' + e.results[0][0].confidence);
-
-  socket.emit('message ', text);
+  socket.emit('chat message', text);
 });
 
 socket.on('bot reply', (replyText) => {
-  console.log('replys');
-
+  console.log('Reply from server with socket: ' + replyText);
   synthVoice(replyText);
 });
 
 function synthVoice(text) {
-  console.log('synthVoice');
-
+  console.log('Synthvoice Called.');
   const synth = window.speechSynthesis;
-  const utterance = new speechSynthesisUtterance();
+  const utterance = new SpeechSynthesisUtterance();
   utterance.text = text;
   synth.speak(utterance);
 }
