@@ -1,0 +1,21 @@
+version: '3'
+services:
+  chatbotserver:
+    restart: always
+    build: .
+    command: npm start
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+  #  ports:
+  #    - "5000:5000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traffic"
+      - "traefik.frontend.rule=Host:${CHATBOT_DOMAIN}.${BASE_URL}"
+      - "traefik.port=80"
+    networks:
+      - traffic
+networks:
+  traffic:
+    external: true

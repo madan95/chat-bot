@@ -10,7 +10,7 @@ const ai = require('apiai')(API_TOKEN);
 app.use(express.static(__dirname + '/views'));
 app.use(express.static(__dirname + '/public'));
 
-const server = app.listen(5000);
+const server = app.listen(80);
 app.get('/', (req, res) => {
   res.sendFile('index.html');
 });
