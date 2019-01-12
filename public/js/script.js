@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       console.log('Listening to microphone.');
       recognition.start();
       //socket.emit('chat message', 'Who are you?'); Testing socket to Dialogflow response.
+      //synthVoice('Testing Synth Voice.');
     });
   }
 });
@@ -22,12 +23,17 @@ recognition.addEventListener('result', (e) => {
   console.log('Result from speech recogition.');
   let last = e.results.length - 1;
   let text = e.results[last][0].transcript;
-  console.log('Words: ' + e.results[0][0].confidence);
-  socket.emit('chat message', text);
+  console.log('User Words: ' + text);
+  try{
+    socket.emit('chat message', text);
+  }
+  catch(error){
+    console.log('eroro chat message');
+  }
 });
 
 socket.on('bot reply', (replyText) => {
-  console.log('Reply from server with socket: ' + replyText);
+  console.log('Bot Reply: ' + replyText);
   synthVoice(replyText);
 });
 
