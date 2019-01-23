@@ -9,14 +9,23 @@ Simple chat bot implementation.
 
 ### Prerequisites
 
-- [Docker Traffic](https://github.com/madan95/traffic)
+- Docker
+- Docker composer
+- Make
+- node
 - [Dialogflow](https://console.dialogflow.com/api-client/#/login)
 
 ### Installing
 
-- ```cd chat-bot ```
+- ```cd chat-bot```
+- ```git submodule init```
+- ```git submodule update```
+- ```cd traffic```
+- ```make start```
+- ```cd ..```
 - Set the .env variable
-- ```make start ```
+- ```npm install```
+- ```make start```
 
 ## Running the tests
 
@@ -33,6 +42,14 @@ Now you should be able to access site on [chatbot.localhost](https://chatbot.loc
 
 We use [SemVer](https://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/madan95/dockerTemple/tags).
 
+## TODO
+
+- Add chat components
+- Add support for scss in webpack
+- Fix node in docker
+- Make node usable from both docker and host
+- Better initial start script
+- Fix gitignore for submodule
 
 ## Author
 - Madan Limbu
