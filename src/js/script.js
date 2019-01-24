@@ -1,3 +1,5 @@
+import '../css/style.scss';
+
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 const socket = io();
